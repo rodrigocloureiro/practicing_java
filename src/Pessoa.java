@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Pessoa {
@@ -15,11 +16,13 @@ public class Pessoa {
 
     @Override
     public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
         return String.format("Nome: %s\n" +
                 "Data de nascimento: %s\n" +
                 "Idade: %d\n" +
                 "Maior de idade: %b\n" +
-                "%s\n", this.nome, this.dataNascimento.toString(), this.idade, this.maiorIdade,
+                "%s\n", this.nome, formatter.format(this.dataNascimento), this.idade, this.maiorIdade,
                 mediaFinal >= 8.5 ? "Você pode fazer uma festa." : "Você não pode fazer uma festa.");
     }
 }
