@@ -1,4 +1,7 @@
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Pessoa {
@@ -12,6 +15,22 @@ public class Pessoa {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.mediaFinal = mediaFinal;
+        this.idade = calculaIdade();
+        this.maiorIdade = idade >= 18;
+    }
+
+    private int calculaIdade() {
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+
+        /*Calendar c = Calendar.getInstance();
+        c.setTime(dataNascimento);
+        int anoNascimento = c.get(Calendar.YEAR);
+        System.out.println(anoAtual - anoNascimento);*/
+
+        LocalDate date = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int anoNascimento = date.getYear();
+
+        return anoAtual - anoNascimento;
     }
 
     @Override
