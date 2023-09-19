@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +19,23 @@ public class Main {
 
             if (opcao == 3) break;
             else if (opcao == 1) {
-                i.listaPessoas().forEach(System.out::println);
+                System.out.print("Informe o nome da pessoa: ");
+                String filtro = sc.nextLine();
+                List<Pessoa> listaFiltrada = i.listaPessoas()
+                        .stream()
+                        .filter(pessoa -> pessoa.getNome().toLowerCase().contains(filtro.toLowerCase()))
+                        .toList();
+                if (listaFiltrada.isEmpty()) {
+                    System.out.println("Não há pessoas com esse nome.");
+                    continue;
+                }
+                System.out.println("Escolha uma das pessoas abaixo para visualizar:");
+                for (int j = 1; j <= listaFiltrada.size(); j++) {
+                    System.out.printf("%d- %s\n", j, listaFiltrada.get(j-1).getNome());
+                }
+                int opcaoPessoa = sc.nextInt();
+                if (opcaoPessoa > 0 && opcaoPessoa <= listaFiltrada.size()) System.out.println(listaFiltrada.get(opcaoPessoa-1));
+                else System.out.println("Opção inválida.");
             } else if (opcao == 2) {
                 System.out.print("Nome completo: ");
                 String nome = sc.nextLine();
@@ -27,8 +44,7 @@ public class Main {
                 System.out.print("Média final: ");
                 double mediaFinal = sc.nextDouble();
 
-                Pessoa p = new Pessoa(nome, formatter.parse(dataNascimento), mediaFinal);
-                i.adicionarPessoa(p);
+                i.adicionarPessoa(new Pessoa(nome, formatter.parse(dataNascimento), mediaFinal));
             } else {
                 System.out.println("Opção inválida.");
             }

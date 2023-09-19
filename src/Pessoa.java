@@ -20,6 +20,10 @@ public class Pessoa {
         this.maiorIdade = idade >= 18;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     private int calculaIdade() {
         int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -50,8 +54,8 @@ public class Pessoa {
                 "Data de nascimento: %s\n" +
                 "Idade: %d\n" +
                 "Maior de idade: %s\n" +
-                "Faltam %d dias para o seu aniversário.\n" +
+                "Faltam %d dias para o aniversário.\n" +
                 "%s\n", this.nome, formatter.format(this.dataNascimento), this.idade, this.maiorIdade ? "Sim" : "Não", diasFaltantes(),
-                mediaFinal >= 8.5 ? "Você pode fazer uma festa.\n" : "Você não pode fazer uma festa.");
+                mediaFinal >= 8.5 ? "Pode fazer festa.\n" : "Não pode fazer festa.");
     }
 }
