@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,6 +34,14 @@ public class Pessoa {
         return anoAtual - anoNascimento;
     }
 
+    private int diasFaltantes() {
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate nascimento = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate proxAniversario = LocalDate.of(dataAtual.getYear() + 1, nascimento.getMonthValue(), nascimento.getDayOfMonth());
+
+        return (int) ChronoUnit.DAYS.between(dataAtual, proxAniversario);
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -41,7 +50,8 @@ public class Pessoa {
                 "Data de nascimento: %s\n" +
                 "Idade: %d\n" +
                 "Maior de idade: %b\n" +
-                "%s\n", this.nome, formatter.format(this.dataNascimento), this.idade, this.maiorIdade,
-                mediaFinal >= 8.5 ? "Você pode fazer uma festa." : "Você não pode fazer uma festa.");
+                "Faltam %d dias para o seu aniversário.\n" +
+                "%s\n", this.nome, formatter.format(this.dataNascimento), this.idade, this.maiorIdade, diasFaltantes(),
+                mediaFinal >= 8.5 ? "Você pode fazer uma festa.\n" : "Você não pode fazer uma festa.");
     }
 }
