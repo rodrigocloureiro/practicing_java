@@ -49,9 +49,9 @@ public class Pessoa {
         return String.format("Nome: %s\n" +
                 "Data de nascimento: %s\n" +
                 "Idade: %d\n" +
-                "Maior de idade: %b\n" +
+                "Maior de idade: %s\n" +
                 "Faltam %d dias para o seu aniversário.\n" +
-                "%s\n", this.nome, formatter.format(this.dataNascimento), this.idade, this.maiorIdade, diasFaltantes(),
+                "%s\n", this.nome, formatter.format(this.dataNascimento), this.idade, this.maiorIdade ? "Sim" : "Não", diasFaltantes(),
                 mediaFinal >= 8.5 ? "Você pode fazer uma festa.\n" : "Você não pode fazer uma festa.");
     }
 }
