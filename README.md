@@ -1,5 +1,4 @@
 # practicing_java
-Exercício em Java abordando collections, herança, polimorfismo, interface..
 
 Criar uma aplicação de cadastro de uma entidade (baseado em um tema escolhido).
 
